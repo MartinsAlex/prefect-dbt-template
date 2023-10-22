@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: VIZ_HIST_NB_ORDERS_BY_PRODUCT
+    description: "Monthly historical number of orders by product name."
+    columns:
+      - name: month
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
