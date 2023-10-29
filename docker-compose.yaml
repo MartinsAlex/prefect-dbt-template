@@ -27,11 +27,31 @@ services:
   grafana:
     image: grafana/grafana:latest
     ports:
+
       - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
     links:
       - postgres
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8081:8080"
+    links:
+      - mysql
 
 volumes:
   postgres_data:
@@ -39,4 +59,6 @@ volumes:
   pgadmin_data:
     driver: local
   grafana_data:
+    driver: local
+  mysql_data:
     driver: local
